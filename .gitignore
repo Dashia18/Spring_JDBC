@@ -1,0 +1,5 @@
+.idea
+out/*
+lib/*
+postgresql-42.0.0.jar
+*.iml
