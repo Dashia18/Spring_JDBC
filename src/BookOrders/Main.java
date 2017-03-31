@@ -22,7 +22,10 @@ public class Main {
 //        RequestsToDB.getInformation();
 
         //task 4
-        RequestsToDB.orderData();
+//        RequestsToDB.orderData();
+
+        //task 5
+        RequestsToDB.determineData();
 
 
     }

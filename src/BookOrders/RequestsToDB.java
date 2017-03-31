@@ -53,7 +53,51 @@ public class RequestsToDB {
         //a
         System.out.println("Last name & Book shop of order :");
         String lastNameShop = "select  buyer.last_name, shop.shop_name   from buyer, shop, orders " +
-                "where(orders.seller = shop.id) AND (orders.buyer = buyer.id) order by orders.buyer";
+                "where(orders.seller = shop.id) AND (orders.buyer = buyer.id) order by orders.buyer;";
         DataManager.getStringStringData(lastNameShop, "last_name","shop_name");
+
+        //b
+        System.out.println("Data about order:");
+        String orderData = "select  orders.order_date, buyer.last_name, buyer.discount,  books.book_name, orders.count " +
+                "from buyer, books,orders " +
+                "where(orders.book = books.id) AND (orders.buyer = buyer.id) order by orders.buyer;";
+        DataManager.getOrderData(orderData);
+
+
+    }
+    //task - 5
+    public static void determineData(){
+        //a
+        System.out.println("Data about order where sum>60000:");
+        String sumRequest = "select  orders.order_number, orders.order_date, buyer.last_name " +
+                "from orders, buyer where(orders.sum > 60000) AND (orders.buyer = buyer.id) order by orders.buyer;";
+        DataManager.getIntDateString(sumRequest);
+
+        //b
+        System.out.println("Data about order where MONTH > 3:");
+        String monthRequest =  "select  orders.order_date, buyer.last_name, buyer.buyer_district " +
+                "from buyer, orders, shop " +
+                "where(EXTRACT(MONTH FROM orders.ORDER_DATE)>3)  " +
+                "AND(shop.id = orders.seller) AND(buyer.id = orders.buyer) " +
+                "AND (shop.shop_district = buyer.buyer_district) order by orders.buyer;";
+        DataManager.getMonth(monthRequest);
+
+        //c
+        System.out.println("Data about order where discount>=10 & discount<=15:");
+        String shopRequest =  "select distinct shop.shop_name " +
+                "from buyer, orders, shop where (shop.id = orders.seller)" +
+                " AND(buyer.id = orders.buyer) AND (shop.shop_district != 'Avtozavodskiy') " +
+                "AND(buyer.discount>=10)AND(buyer.discount<=15)order by shop.shop_name;";
+        DataManager.getStringRowsData(shopRequest,"shop_name");
+
+        //d
+        System.out.println("Data about order where district shop = district stock:");
+        String stockRequest =  "select  books.book_name, books.stock, books.quantity " +
+                "from orders, shop, books where(shop.id = orders.seller) AND(books.id = orders.book) " +
+                "AND (books.stock = shop.shop_district)  order by books.book_name;";
+        DataManager.getStock(stockRequest);
+
+
+
     }
 }

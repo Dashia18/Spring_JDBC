@@ -269,12 +269,111 @@ public class DataManager {
             }
             System.out.println();
 
+            statement.close();
+            resultSet.close();
+            connection.close();
 
+        } catch (ClassNotFoundException|SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void getOrderData(String sql) {
+        Connection connection;
+        try {
+            Class.forName(JDBC_DRIVER);
+            connection = DriverManager.getConnection(DB_URL, USER,PASSWORD);
 
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
 
+            while (resultSet.next()) {
+                Date date = resultSet.getDate("order_date");
+                String last_name = resultSet.getString("last_name");
+                int discount = resultSet.getInt("discount");
+                String book_name = resultSet.getString("book_name");
+                int count = resultSet.getInt("count");
+                System.out.println(date+ " " + last_name+ " " +discount+ " " +book_name+ " " +count);
+            }
+            System.out.println();
 
+            statement.close();
+            resultSet.close();
+            connection.close();
 
+        } catch (ClassNotFoundException|SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void getIntDateString(String sql) {
+        Connection connection;
+        try {
+            Class.forName(JDBC_DRIVER);
+            connection = DriverManager.getConnection(DB_URL, USER,PASSWORD);
 
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                Date order_date = resultSet.getDate("order_date");
+                String last_name = resultSet.getString("last_name");
+                int order_number = resultSet.getInt("order_number");
+
+                System.out.println(order_number+ " " + order_date+ " " +last_name);
+            }
+            System.out.println();
+
+            statement.close();
+            resultSet.close();
+            connection.close();
+
+        } catch (ClassNotFoundException|SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void getMonth(String sql) {
+        Connection connection;
+        try {
+            Class.forName(JDBC_DRIVER);
+            connection = DriverManager.getConnection(DB_URL, USER,PASSWORD);
+
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                Date order_date = resultSet.getDate("order_date");
+                String last_name = resultSet.getString("last_name");
+                String buyer_district = resultSet.getString("buyer_district");
+
+                System.out.println(order_date+ " " + last_name+ " " +buyer_district);
+            }
+            System.out.println();
+
+            statement.close();
+            resultSet.close();
+            connection.close();
+
+        } catch (ClassNotFoundException|SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void getStock(String sql) {
+        Connection connection;
+        try {
+            Class.forName(JDBC_DRIVER);
+            connection = DriverManager.getConnection(DB_URL, USER,PASSWORD);
+
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+
+                String book_name = resultSet.getString("book_name");
+                String stock = resultSet.getString("stock");
+                int quantity = resultSet.getInt("quantity");
+
+                System.out.println(book_name+ " " + stock+ " " +quantity);
+            }
+            System.out.println();
 
             statement.close();
             resultSet.close();
