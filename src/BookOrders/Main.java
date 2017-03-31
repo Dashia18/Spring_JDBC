@@ -16,13 +16,13 @@ public class Main {
         DataManager.mainForDataManage();
 
         //task 2
-//        RequestsToDB.getDifferentTypes();
+        RequestsToDB.getDifferentTypes();
 
         //task 3
-//        RequestsToDB.getInformation();
+        RequestsToDB.getInformation();
 
         //task 4
-//        RequestsToDB.orderData();
+        RequestsToDB.orderData();
 
         //task 5
         RequestsToDB.determineData();
